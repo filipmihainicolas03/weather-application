@@ -86,5 +86,35 @@ searchField.addEventListener("input", function () {
             });
         }, serachTimeoutDuration);
     }
-
 });
+
+const container = document.querySelector("data-container");
+const loading = document.querySelector("[data-loading]");
+const currentLocationBtn = document.querySelector("data-current-location-btn");
+const errorContent = document.querySelector("[data-error-content");
+
+
+/**
+ * Render all weather data in html page
+ * 
+ * @param {number} lat Latitude
+ * @param {number} lon Longitude
+ */
+
+
+export const updateWeather = function (lat, lon) {
+    loading.style.display = "grid";
+    container.style.overflowY = "hidden";
+    container.classList.contains("fade-in") ?? container.classList.remove("fade-in");
+    errorContent.style.display = "none"
+}
+
+const currentWeatherSection = document.querySelector("[data-current-weather]");
+    const highlightSection = document.querySelector("[data-highlights]")
+    const hourlySection = document.querySelector("[data-hourly-forecast]");
+    const forecastSection = document.querySelector("[data-5-day-forecast]");
+    
+    currentWeatherSection.innerHTML = "";
+    highlightSection.innerHTML = "";
+    hourlySection.innerHTML = "";
+    forecastSection.innerHTML = "";
