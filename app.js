@@ -107,14 +107,80 @@ export const updateWeather = function (lat, lon) {
     container.style.overflowY = "hidden";
     container.classList.contains("fade-in") ?? container.classList.remove("fade-in");
     errorContent.style.display = "none"
-}
 
-const currentWeatherSection = document.querySelector("[data-current-weather]");
+
+    const currentWeatherSection = document.querySelector("[data-current-weather]");
     const highlightSection = document.querySelector("[data-highlights]")
     const hourlySection = document.querySelector("[data-hourly-forecast]");
     const forecastSection = document.querySelector("[data-5-day-forecast]");
-    
+        
     currentWeatherSection.innerHTML = "";
     highlightSection.innerHTML = "";
     hourlySection.innerHTML = "";
     forecastSection.innerHTML = "";
+
+    if (window.location,hash == "#/current-location") {
+        currentLocationBtn.setAttribute("disabled", "");
+    } else {
+        currentLocationBtn.removeAttribute("disabled");
+    }
+
+    /**
+     * CURRENT WEATHER SECTION  
+     */
+
+    fetchData(url.currentWeather(lat, lon), function (currentWeather) {
+
+        const {
+            weather,
+            dt: dateUnix,
+            sys: { sunrise: sunriseUnixUTC, sunset: sunsetUnixUTC },/*probabil trebuie scos*/
+            main: { temp, feels_like, pressure, humidity },
+            visibility,
+            timezone
+        } = currentWeather
+        const [{ description, icon }] = weather;
+
+        const card = document.createElement("div");
+        card.classList.add("card", "card-lg", "current-weather-card")
+
+        card.innerHTML = `
+            <h2 class="title-2 card-title">Now</h2>
+
+            <div class="weapper">
+                <p class="heading">${parseInt(temp)};<sup>c</sup></p>
+
+                <img src="./assets/images/${icon}.png" width="70"
+                height="70" alt="${description}"
+                    class="weather-icon">
+            </div>
+
+            <p class="body-3">Overcast Clouds</p>
+
+            <ul class="meta-list">
+
+                <li class="meta-item">
+                    <span class="m-icon">calendar_today</span>
+
+                    <p class="title-3 meta-text">${module.getDate(dateUnix, timezone)}</p>
+                </li>
+            </ul>
+
+            <ul class="meta-list">
+
+                <li class="meta-item">
+                    <span class="m-icon">location_on</span>
+
+                    <p class="title-3 meta-text" data-location</p>
+                </li>
+            </ul>
+        `;
+
+        fetchData(url.reverseGeo(lat, lon), function([{ name, country }]) {
+            card.querySelector("[data-location]").innerHTML = `${name}, ${country}
+            `
+        })
+
+        currentWeatherSection.appendChild();
+    })
+}
