@@ -24,6 +24,9 @@ export const url = {
     forecast(lat, lon) {
      return `https://api.openweathermap.org/data/2.5/forecast?${lat}&${lon}&units=metric`    
     },
+    airPollution(lat, lon) {
+     return `https://api.openweathermap.org/data/2.5/air_pollution?${lat}&${lon}`    
+    },
     reverseGeo(lat, lon) {
      return `http://api.openweathermap.org/geo/1.0/reverse?${lat}&${lon}&limit=5`
     },
