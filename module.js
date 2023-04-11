@@ -67,3 +67,26 @@ export const getHours = function(timeUnix, timezone) {
 
     return `${hours % 12 || 12}:${period}`;
 }
+
+export const aqiText = {
+  1: {
+    level: "Good",
+    message: "Air quality is considered satisfactory, and air pollution poses little or no risk"
+  },
+  2: {
+    level: "Fair",
+    message: "Air quality is acceptable"
+  },
+  3: {
+    level: "Moderate",
+    message: "Members of sensitive groups may experience health effects"
+  },
+  4: {
+    level: "Poor",
+    message: "Everyone may begin to experience health effects"
+  },
+  5: {
+    level: "Very Poor",
+    message: "Health warnings of emergency conditions"
+  }
+}
